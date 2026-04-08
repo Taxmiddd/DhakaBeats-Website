@@ -23,6 +23,7 @@ type Event = {
   price?: string;
   tickets_url?: string;
   status: "published" | "draft";
+  is_concluded: boolean;
 };
 
 type GalleryItem = {
@@ -75,7 +76,7 @@ export default function AdminDashboard() {
   // Unified Form Data State
   const [eventForm, setEventForm] = useState<Partial<Event>>({
     title: "", description: "", date: "", end_date: "", location: "", image_url: "", 
-    is_highlight: false, price: "", tickets_url: "", status: "published"
+    is_highlight: false, price: "", tickets_url: "", status: "published", is_concluded: false
   });
 
   const [galleryForm, setGalleryForm] = useState<Partial<GalleryItem>>({
@@ -220,6 +221,13 @@ export default function AdminDashboard() {
     fetchEvents();
   };
 
+  const getStatusBadge = (event: Event) => {
+    if (event.is_concluded) {
+      return <span className="text-[8px] font-black uppercase tracking-widest px-2 py-0.5 bg-white/10 text-white/40 rounded-md border border-white/5">Concluded</span>;
+    }
+    return <span className="text-[8px] font-black uppercase tracking-widest px-2 py-0.5 bg-electric-red/10 text-electric-red rounded-md border border-electric-red/20">Upcoming</span>;
+  };
+
   if (loading || !session) return null;
 
   return (
@@ -270,7 +278,11 @@ export default function AdminDashboard() {
                   <div className="flex items-center gap-6">
                     <img src={event.image_url || "/logo1.svg"} className="w-16 h-16 rounded-xl object-cover bg-black" alt="" />
                     <div>
-                      <h3 className="font-bold uppercase flex items-center gap-2">{event.title} {event.is_highlight && <Star size={14} className="fill-yellow-500 text-yellow-500" />}</h3>
+                      <h3 className="font-bold uppercase flex items-center gap-2">
+                        {event.title} 
+                        {event.is_highlight && <Star size={14} className="fill-yellow-500 text-yellow-500" />}
+                        {getStatusBadge(event)}
+                      </h3>
                       <p className="text-white/40 text-xs uppercase tracking-widest">{event.date} • {event.location}</p>
                     </div>
                   </div>
@@ -418,6 +430,15 @@ export default function AdminDashboard() {
                       <div className="grid grid-cols-2 gap-4">
                         <div><label className="text-[10px] uppercase font-black text-white/30 ml-1">Status</label><select value={eventForm.status} onChange={e => setEventForm({...eventForm, status: e.target.value as any})} className="w-full bg-white/5 border border-white/5 rounded-xl p-4 text-white focus:outline-none focus:border-electric-red uppercase font-bold text-xs"><option value="published" className="bg-black">Published</option><option value="draft" className="bg-black">Draft</option></select></div>
                         <div><label className="text-[10px] uppercase font-black text-white/30 ml-1">Featured</label><div onClick={() => setEventForm({...eventForm, is_highlight: !eventForm.is_highlight})} className={`w-full p-4 rounded-xl text-center cursor-pointer transition-all uppercase font-bold text-xs border ${eventForm.is_highlight ? 'border-yellow-500 text-yellow-500 bg-yellow-500/5' : 'border-white/5 text-white/30'}`}>{eventForm.is_highlight ? "Highlighted" : "Standard"}</div></div>
+                      </div>
+                      <div className="pt-2">
+                        <label className="text-[10px] uppercase font-black text-white/30 ml-1">Event Status Override</label>
+                        <div 
+                          onClick={() => setEventForm({...eventForm, is_concluded: !eventForm.is_concluded})} 
+                          className={`w-full p-4 rounded-xl text-center cursor-pointer transition-all uppercase font-bold text-xs border mt-1 ${eventForm.is_concluded ? 'border-white/20 text-white/60 bg-white/5' : 'border-electric-red/20 text-electric-red bg-electric-red/5'}`}
+                        >
+                          {eventForm.is_concluded ? "Already Concluded" : "Upcoming Event"}
+                        </div>
                       </div>
                     </div>
                     <div className="space-y-4">

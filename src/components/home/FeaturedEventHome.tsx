@@ -16,6 +16,7 @@ type Event = {
   location: string;
   image_url: string;
   is_highlight: boolean;
+  is_concluded: boolean;
   price?: string;
   tickets_url?: string;
 };
@@ -68,7 +69,7 @@ export default function FeaturedEventHome() {
         <Image 
           src={event.image_url} 
           fill
-          className="object-cover grayscale opacity-40" 
+          className={`object-cover ${event.is_concluded ? 'grayscale opacity-30' : 'grayscale opacity-40'}`} 
           alt={event.title}
           quality={75}
           priority
@@ -85,9 +86,9 @@ export default function FeaturedEventHome() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="px-6 py-2 rounded-full border border-white/10 glass text-[10px] font-black uppercase tracking-[0.4em] text-white/40"
+            className={`px-6 py-2 rounded-full border glass text-[10px] font-black uppercase tracking-[0.4em] ${event.is_concluded ? 'border-white/5 text-white/20' : 'border-white/10 text-white/40'}`}
           >
-            Featured Spotlight
+            {event.is_concluded ? "Concluded Spotlight" : "Featured Spotlight"}
           </motion.div>
 
           <div className="relative w-full">
@@ -134,6 +135,13 @@ export default function FeaturedEventHome() {
               <span className="text-electric-red inline-block transform-gpu">
                 {lastWord}
               </span>
+              {event.is_concluded && (
+                <div className="absolute -top-12 left-1/2 -translate-x-1/2 md:static md:translate-x-0 md:mt-4">
+                  <span className="px-4 py-1 rounded-md border border-white/5 bg-white/5 text-[10px] font-black tracking-[0.3em] text-white/20">
+                    PAST EXPERIENCE
+                  </span>
+                </div>
+              )}
             </motion.h2>
           </div>
 

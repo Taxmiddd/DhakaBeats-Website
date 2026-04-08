@@ -15,6 +15,7 @@ type Event = {
   location: string;
   image_url: string;
   is_highlight: boolean;
+  is_concluded: boolean;
   price?: string;
   tickets_url?: string;
 };
@@ -113,10 +114,17 @@ export default function EventsPage() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="group relative glass rounded-[40px] overflow-hidden border border-white/10 aspect-[16/10] shadow-2xl"
+                  className={`group relative glass rounded-[40px] overflow-hidden border border-white/10 aspect-[16/10] shadow-2xl transition-all duration-500 ${event.is_concluded ? 'opacity-60 grayscale' : ''}`}
                 >
-                  <img src={event.image_url} alt="" className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out" />
+                  <img src={event.image_url} alt="" className={`absolute inset-0 w-full h-full object-cover group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out ${event.is_concluded ? 'grayscale' : 'grayscale-0'}`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80" />
+                  
+                  {/* Concluded Badge - Flagship only as requested */}
+                  {event.is_concluded && (
+                    <div className="absolute top-8 right-8 z-30 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-black uppercase tracking-[0.2em] text-white/60">
+                      Concluded
+                    </div>
+                  )}
                   
                   <div className="absolute inset-0 p-10 flex flex-col justify-end z-20 space-y-6">
                     <div className="space-y-2">
@@ -161,7 +169,7 @@ export default function EventsPage() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
                   viewport={{ once: true }}
-                  className="group relative border-b border-white/5 py-12 md:py-16 flex flex-col md:flex-row items-start md:items-center gap-10 hover:bg-white/[0.02] transition-colors"
+                  className={`group relative border-b border-white/5 py-12 md:py-16 flex flex-col md:flex-row items-start md:items-center gap-10 hover:bg-white/[0.02] transition-all duration-500 ${event.is_concluded ? 'opacity-40 grayscale' : ''}`}
                 >
                   {/* Date Badge */}
                   <div className="flex flex-row md:flex-col items-baseline gap-2 md:gap-0 shrink-0 min-w-24">
