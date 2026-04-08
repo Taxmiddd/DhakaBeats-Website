@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="public/logo2.svg" alt="Dhaka Beats Logo" width="200" />
+</div>
+
 # Dhaka Beats 🎸
 **One Beat Ahead.**
 
