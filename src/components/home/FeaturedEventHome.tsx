@@ -41,25 +41,25 @@ export default function FeaturedEventHome() {
     fetchHighlight();
   }, []);
 
-  const getDayOnly = (dateStr: string) => {
-    const d = new Date(dateStr);
-    return d.getDate();
-  };
+  const getFormattedTimeline = (dateStr: string, endDateStr?: string) => {
+    const start = new Date(dateStr);
+    const month = start.toLocaleString('default', { month: 'short' }).toUpperCase();
+    const startDay = start.getDate();
+    
+    if (!endDateStr || endDateStr === dateStr) {
+      return `${month} ${startDay}`;
+    }
 
-  const getMonthYear = (dateStr: string) => {
-    const d = new Date(dateStr);
-    const month = d.toLocaleString('default', { month: 'short' }).toUpperCase();
-    const year = d.getFullYear().toString().slice(-2);
-    return { month, year };
+    const end = new Date(endDateStr);
+    const endDay = end.getDate();
+    return `${month} ${startDay}-${endDay}`;
   };
 
   if (loading || !event) return null;
 
-  const { month, year } = getMonthYear(event.date);
-  
   // Title Split Logic for Rishka Style (Last word in red)
   const words = event.title.split(" ");
-  const lastWord = words.pop();
+  const lastWord = words.pop() || "";
   const firstPart = words.join(" ");
 
   return (
@@ -112,17 +112,6 @@ export default function FeaturedEventHome() {
 
               {/* Central Headline Area */}
               <div className="flex-1 text-center order-1 xl:order-2 z-20 flex flex-col items-center gap-6">
-                {event.is_concluded && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="px-5 py-2 rounded-full border border-white/10 bg-black/80 backdrop-blur-md text-[8px] font-black uppercase tracking-[0.4em] text-white/40 whitespace-nowrap"
-                  >
-                    PAST EXPERIENCE
-                  </motion.div>
-                )}
-
                 <motion.h2
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -148,7 +137,7 @@ export default function FeaturedEventHome() {
                   <Calendar size={16} />
                 </div>
                 <span className="text-xl md:text-2xl font-black uppercase text-white text-center xl:text-right leading-tight">
-                  {month} {getDayOnly(event.date)} &apos;{year}
+                  {getFormattedTimeline(event.date, event.end_date)}
                 </span>
               </motion.div>
 
