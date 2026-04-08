@@ -91,27 +91,27 @@ export default function FeaturedEventHome() {
             {event.is_concluded ? "Concluded Spotlight" : "Featured Spotlight"}
           </motion.div>
 
-          <div className="relative w-full">
-            {/* Symmetric Metadata (Desktop) */}
-            <div className="hidden lg:flex absolute inset-x-0 top-1/2 -translate-y-1/2 justify-between items-center pointer-events-none transform-gpu">
+          <div className="relative w-full max-w-[1400px] mx-auto px-4 md:px-12">
+            {/* Symmetric Metadata (Desktop) - Repositioned to avoid overlap */}
+            <div className="hidden xl:flex absolute inset-x-0 top-0 justify-between items-start pointer-events-none transform-gpu px-12">
               <motion.div 
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-start space-y-2"
+                className="flex flex-col items-start space-y-2 bg-black/40 backdrop-blur-sm p-4 rounded-2xl border border-white/5"
               >
                 <div className="flex items-center gap-2 text-electric-red">
                   <MapPin size={16} />
                   <span className="text-[10px] font-black uppercase tracking-[0.3em]">Location</span>
                 </div>
-                <span className="text-xl font-black uppercase tracking-tighter text-white">{event.location}</span>
+                <span className="text-xl font-black uppercase tracking-tighter text-white max-w-[200px] truncate">{event.location}</span>
               </motion.div>
 
               <motion.div 
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-end space-y-2"
+                className="flex flex-col items-end space-y-2 bg-black/40 backdrop-blur-sm p-4 rounded-2xl border border-white/5"
               >
                 <div className="flex items-center gap-2 text-electric-red">
                   <span className="text-[10px] font-black uppercase tracking-[0.3em]">Timeline</span>
@@ -123,25 +123,27 @@ export default function FeaturedEventHome() {
               </motion.div>
             </div>
 
-            {/* Main Headline - Optimized rendering */}
+            {/* Main Headline - Scaled for better fit */}
             <motion.h2
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-7xl md:text-9xl lg:text-[11rem] font-black uppercase tracking-tighter leading-none text-white drop-shadow-2xl will-change-transform"
+              className="text-6xl md:text-8xl lg:text-[9rem] font-black uppercase tracking-tighter leading-none text-white drop-shadow-2xl will-change-transform"
             >
               {firstPart} <br className="hidden md:block" />
-              <span className="text-electric-red inline-block transform-gpu">
-                {lastWord}
-              </span>
-              {event.is_concluded && (
-                <div className="absolute -top-12 left-1/2 -translate-x-1/2 md:static md:translate-x-0 md:mt-4">
-                  <span className="px-4 py-1 rounded-md border border-white/5 bg-white/5 text-[10px] font-black tracking-[0.3em] text-white/20">
-                    PAST EXPERIENCE
-                  </span>
-                </div>
-              )}
+              <div className="relative inline-block">
+                <span className="text-electric-red inline-block transform-gpu">
+                  {lastWord}
+                </span>
+                {event.is_concluded && (
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 md:-top-16">
+                    <span className="px-4 py-1.5 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-[8px] font-black tracking-[0.4em] text-white/40 whitespace-nowrap">
+                      PAST EXPERIENCE
+                    </span>
+                  </div>
+                )}
+              </div>
             </motion.h2>
           </div>
 
