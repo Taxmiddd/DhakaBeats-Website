@@ -57,21 +57,15 @@ export default function WhatIsDhakaBeats() {
       >
         <div className="space-y-4">
           <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter">
-            {settings.about_headline?.split('?')[0]} <span className="text-electric-red">{settings.about_headline?.includes('?') ? '?' : ''}</span>
+            {settings.about_headline?.includes("Dhaka Beats?") ? (
+              <>
+                {settings.about_headline.replace("Dhaka Beats?", "")}
+                <span className="text-electric-red">Dhaka Beats?</span>
+              </>
+            ) : (
+              settings.about_headline || "What is Dhaka Beats?"
+            )}
           </h2>
-          {/* Fallback if headline split is tricky */}
-          {!settings.about_headline?.includes('?') && (
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter">
-              {settings.about_headline || "What is Dhaka Beats?"}
-            </h2>
-          )}
-          {/* Improved Headline rendering */}
-          <h2 className="sr-only">{settings.about_headline}</h2>
-          <div className="text-4xl md:text-5xl font-black uppercase tracking-tighter">
-             {settings.about_headline?.replace("Dhaka Beats?", "")}
-             <span className="text-electric-red">Dhaka Beats?</span>
-          </div>
-
           <div className="w-20 h-1 bg-electric-red" />
         </div>
         
