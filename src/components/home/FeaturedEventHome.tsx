@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase/client";
 import { motion } from "framer-motion";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 type Event = {
   id: string;
@@ -61,13 +62,16 @@ export default function FeaturedEventHome() {
   const firstPart = words.join(" ");
 
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden py-24 transform-gpu">
+    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden py-24 transform-gpu [transform:translateZ(0)]">
       {/* Background Cinematic Treatment - Optimized for Performance */}
-      <div className="absolute inset-0 z-0 will-change-transform">
-        <img 
+      <div className="absolute inset-0 z-0">
+        <Image 
           src={event.image_url} 
-          className="w-full h-full object-cover grayscale opacity-40 scale-100 transition-transform duration-[2000ms] ease-out will-change-transform" 
-          alt="" 
+          fill
+          className="object-cover grayscale opacity-40" 
+          alt={event.title}
+          quality={80}
+          priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/20 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black/60 pointer-events-none" />
@@ -127,7 +131,7 @@ export default function FeaturedEventHome() {
               className="text-7xl md:text-9xl lg:text-[11rem] font-black uppercase tracking-tighter leading-none text-white drop-shadow-2xl will-change-transform"
             >
               {firstPart} <br className="hidden md:block" />
-              <span className="text-electric-red inline-block transform-gpu" style={{ WebkitTextFillColor: '#ea0000' }}>
+              <span className="text-electric-red inline-block transform-gpu">
                 {lastWord}
               </span>
             </motion.h2>
@@ -174,10 +178,9 @@ export default function FeaturedEventHome() {
         </div>
       </div>
 
-      {/* Side Glowing Orbs - Simplified for performance */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-electric-red/10 rounded-full blur-[100px] pointer-events-none opacity-50" />
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-64 h-64 bg-white/5 rounded-full blur-[100px] pointer-events-none opacity-50" />
+      {/* Side Glowing Orbs - Optimized Gradients */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-[radial-gradient(circle,rgba(234,0,0,0.1)_0%,transparent_70%)] pointer-events-none opacity-50" />
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-64 h-64 bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] pointer-events-none opacity-50" />
     </section>
-
   );
 }
