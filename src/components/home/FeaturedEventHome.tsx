@@ -105,7 +105,7 @@ export default function FeaturedEventHome() {
                   <MapPin size={16} />
                   <span className="text-[10px] font-black uppercase tracking-[0.3em] whitespace-nowrap">Location</span>
                 </div>
-                <span className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white text-center xl:text-left leading-tight">
+                <span className="text-xl md:text-2xl font-black uppercase text-white text-center xl:text-left leading-tight">
                   {event.location}
                 </span>
               </motion.div>
@@ -144,7 +144,7 @@ export default function FeaturedEventHome() {
                   <span className="text-[10px] font-black uppercase tracking-[0.3em] whitespace-nowrap">Timeline</span>
                   <Calendar size={16} />
                 </div>
-                <span className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white text-center xl:text-right leading-tight">
+                <span className="text-xl md:text-2xl font-black uppercase text-white text-center xl:text-right leading-tight">
                   {month} {getDayOnly(event.date)} &apos;{year}
                 </span>
               </motion.div>
@@ -165,7 +165,11 @@ export default function FeaturedEventHome() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              {event.tickets_url ? (
+              {event.is_concluded ? (
+                <div className="px-12 py-5 border border-white/10 glass text-[10px] font-black uppercase tracking-[0.4em] text-white/40 rounded-full">
+                  Experience Concluded
+                </div>
+              ) : event.tickets_url ? (
                 <a 
                   href={event.tickets_url} 
                   target="_blank" 
