@@ -160,10 +160,14 @@ export default function AdminDashboard() {
         if (editingItem) await supabase.from("services").update(serviceForm).eq("id", editingItem.id);
         else await supabase.from("services").insert([serviceForm]);
       } else if (activeTab === "settings") {
-        for (const [key, value] of Object.entries(settingsForm)) {
-          await supabase.from("site_settings").upsert({ key, value }, { onConflict: "key" });
-        }
-        alert("Settings Updated!");
+        const settingsArray = Object.entries(settingsForm).map(([key, value]) => ({ key, value }));
+        const { error } = await supabase
+          .from("site_settings")
+          .upsert(settingsArray, { onConflict: "key" });
+        
+        if (error) throw error;
+        
+        alert("Site CMS Updated Successfully! ✨");
         return refreshData();
       }
       setShowModal(false);
