@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dhaka Beats 🎸
+**One Beat Ahead.**
 
-## Getting Started
+Dhaka Beats is a premium, flagship event platform designed to define the pulse of Dhaka's underground culture and elite music scene. This platform serves as the digital heart of an exclusive event management ecosystem, blending sophisticated minimalism with high-octane visual energy.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ The Experience
+- **Flagship Event Grid**: High-contrast, typography-centric showcases of the city's biggest concerts.
+- **Experience Timeline**: A chronological journey through past, present, and future festivals.
+- **Atmospheric Design**: Matte black aesthetics, electric red highlights, and dynamic glassmorphism.
+- **Concierge Performance**: Ultra-smooth transitions powered by Framer Motion and Next.js 15.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ CMS Power (Full Control)
+This isn't just a website—it's a production-ready management tool. The custom **Admin Dashboard** offers 100% control over the platform's content without writing a single line of code:
+- **Global CMS**: Live editing of headlines, sub-headlines, and statistics (Events/Visitors).
+- **Service Management**: CRUD operations for service cards with custom branded PNG icon support.
+- **Asset Hub**: Drag-and-drop gallery management with integrated Supabase Storage.
+- **Dynamic Scheduling**: Support for single-day spotlights and multi-day festival date ranges.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Tech Stack
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router & Turbopack)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Backend**: [Supabase](https://supabase.com/) (Auth, PostgreSQL, Storage)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Infrastructure**: Ready for deployment on [Vercel](https://vercel.com/)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔧 Installation & Setup
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Taxmiddd/DhakaBeats-Website.git
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Environment Variables:**
+   Create a `.env.local` file with your Supabase credentials:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+   ```
 
-## Deploy on Vercel
+4. **Run Development Server:**
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+© 2026 Dhaka Beats. Developed with precision for the pulse of the city.
