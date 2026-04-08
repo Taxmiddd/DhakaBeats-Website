@@ -111,7 +111,18 @@ export default function FeaturedEventHome() {
               </motion.div>
 
               {/* Central Headline Area */}
-              <div className="flex-1 text-center order-1 xl:order-2 z-20">
+              <div className="flex-1 text-center order-1 xl:order-2 z-20 flex flex-col items-center gap-6">
+                {event.is_concluded && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="px-5 py-2 rounded-full border border-white/10 bg-black/80 backdrop-blur-md text-[8px] font-black uppercase tracking-[0.4em] text-white/40 whitespace-nowrap"
+                  >
+                    PAST EXPERIENCE
+                  </motion.div>
+                )}
+
                 <motion.h2
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -121,14 +132,6 @@ export default function FeaturedEventHome() {
                 >
                   <div className="relative inline-block whitespace-nowrap">
                     {firstPart} {lastWord !== "" && <span className="text-electric-red">{lastWord}</span>}
-                    
-                    {event.is_concluded && (
-                      <div className="absolute -top-16 left-1/2 -translate-x-1/2">
-                        <span className="px-5 py-2 rounded-full border border-white/10 bg-black/80 backdrop-blur-md text-[8px] font-black tracking-[0.4em] text-white/40 whitespace-nowrap">
-                          PAST EXPERIENCE
-                        </span>
-                      </div>
-                    )}
                   </div>
                 </motion.h2>
               </div>
