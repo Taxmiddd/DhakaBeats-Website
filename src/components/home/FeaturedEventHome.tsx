@@ -70,7 +70,7 @@ export default function FeaturedEventHome() {
           fill
           className="object-cover grayscale opacity-40" 
           alt={event.title}
-          quality={80}
+          quality={75}
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/20 pointer-events-none" />
