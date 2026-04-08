@@ -91,70 +91,79 @@ export default function FeaturedEventHome() {
             {event.is_concluded ? "Concluded Spotlight" : "Featured Spotlight"}
           </motion.div>
 
-          <div className="relative w-full max-w-[1400px] mx-auto px-4 md:px-12">
-            {/* Symmetric Metadata (Desktop) - Repositioned to avoid overlap */}
-            <div className="hidden xl:flex absolute inset-x-0 top-0 justify-between items-start pointer-events-none transform-gpu px-12">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="flex flex-col xl:flex-row items-center justify-between gap-12 xl:gap-6">
+              
+              {/* Left Metadata - Desktop Side, Mobile Top */}
               <motion.div 
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-start space-y-2 bg-black/40 backdrop-blur-sm p-4 rounded-2xl border border-white/5"
+                className="flex flex-col items-center xl:items-start space-y-2 order-2 xl:order-1 min-w-[200px]"
               >
                 <div className="flex items-center gap-2 text-electric-red">
                   <MapPin size={16} />
-                  <span className="text-[10px] font-black uppercase tracking-[0.3em]">Location</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] whitespace-nowrap">Location</span>
                 </div>
-                <span className="text-xl font-black uppercase tracking-tighter text-white max-w-[200px] truncate">{event.location}</span>
+                <span className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white text-center xl:text-left leading-tight">
+                  {event.location}
+                </span>
               </motion.div>
 
+              {/* Central Headline Area */}
+              <div className="flex-1 text-center order-1 xl:order-2 z-20">
+                <motion.h2
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="text-6xl md:text-8xl xl:text-[clamp(5rem,8vw,10rem)] font-black uppercase tracking-tighter leading-[0.85] text-white drop-shadow-2xl will-change-transform"
+                >
+                  <div className="relative inline-block">
+                    {firstPart} <br className="hidden md:block" />
+                    <span className="text-electric-red inline-block transform-gpu">
+                      {lastWord}
+                    </span>
+                    
+                    {event.is_concluded && (
+                      <div className="absolute -top-16 left-1/2 -translate-x-1/2">
+                        <span className="px-5 py-2 rounded-full border border-white/10 bg-black/80 backdrop-blur-md text-[8px] font-black tracking-[0.4em] text-white/40 whitespace-nowrap">
+                          PAST EXPERIENCE
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </motion.h2>
+              </div>
+
+              {/* Right Metadata - Desktop Side, Mobile Top */}
               <motion.div 
-                initial={{ opacity: 0, x: 30 }}
+                initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-end space-y-2 bg-black/40 backdrop-blur-sm p-4 rounded-2xl border border-white/5"
+                className="flex flex-col items-center xl:items-end space-y-2 order-3 min-w-[200px]"
               >
                 <div className="flex items-center gap-2 text-electric-red">
-                  <span className="text-[10px] font-black uppercase tracking-[0.3em]">Timeline</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] whitespace-nowrap">Timeline</span>
                   <Calendar size={16} />
                 </div>
-                <span className="text-xl font-black uppercase tracking-tighter text-white">
+                <span className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white text-center xl:text-right leading-tight">
                   {month} {getDayOnly(event.date)} &apos;{year}
                 </span>
               </motion.div>
-            </div>
 
-            {/* Main Headline - Scaled for better fit */}
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-6xl md:text-8xl lg:text-[9rem] font-black uppercase tracking-tighter leading-none text-white drop-shadow-2xl will-change-transform"
-            >
-              {firstPart} <br className="hidden md:block" />
-              <div className="relative inline-block">
-                <span className="text-electric-red inline-block transform-gpu">
-                  {lastWord}
-                </span>
-                {event.is_concluded && (
-                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 md:-top-16">
-                    <span className="px-4 py-1.5 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-[8px] font-black tracking-[0.4em] text-white/40 whitespace-nowrap">
-                      PAST EXPERIENCE
-                    </span>
-                  </div>
-                )}
-              </div>
-            </motion.h2>
+            </div>
           </div>
 
+          {/* Description & CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="max-w-xl space-y-10"
+            className="max-w-xl mx-auto space-y-10 group"
           >
-            <p className="text-lg md:text-xl text-white/60 font-medium leading-relaxed tracking-wide italic">
+            <p className="text-lg md:text-xl text-white/60 font-medium leading-relaxed tracking-wide italic px-4">
                &quot;{event.description}&quot;
             </p>
 
@@ -164,7 +173,7 @@ export default function FeaturedEventHome() {
                   href={event.tickets_url} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="px-12 py-5 bg-white text-black text-[10px] font-black uppercase tracking-[0.4em] rounded-full hover:bg-electric-red hover:text-white transition-all transform hover:scale-105 transform-gpu"
+                  className="px-12 py-5 bg-white text-black text-[10px] font-black uppercase tracking-[0.4em] rounded-full hover:bg-electric-red hover:text-white transition-all transform hover:scale-105 transform-gpu shadow-2xl shadow-white/5"
                 >
                   Book Access
                 </a>
@@ -176,10 +185,10 @@ export default function FeaturedEventHome() {
               
               <Link 
                 href="/events" 
-                className="group flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.4em] text-white hover:text-electric-red transition-colors"
+                className="group/link flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.4em] text-white hover:text-electric-red transition-colors"
               >
                 View Schedule 
-                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-electric-red group-hover:bg-electric-red transition-all transform-gpu">
+                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover/link:border-electric-red group-hover/link:bg-electric-red transition-all transform-gpu">
                   <ArrowRight size={16} />
                 </div>
               </Link>
