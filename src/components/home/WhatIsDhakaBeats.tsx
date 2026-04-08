@@ -97,9 +97,15 @@ export default function WhatIsDhakaBeats() {
       >
         <div className="aspect-[4/5] rounded-2xl overflow-hidden glass border border-white/10 relative">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
-          <div className="w-full h-full bg-zinc-900 flex items-center justify-center p-12">
-            <div className="w-2/3 h-2/3 bg-electric-red/10 rounded-full blur-[80px]" />
-            <img src="/logo1.svg" alt="About Dhaka Beats" className="w-32 opacity-20 group-hover:opacity-40 transition-opacity grayscale" />
+          <div className="w-full h-full bg-zinc-900 flex items-center justify-center relative overflow-hidden">
+            {settings.about_image ? (
+              <img src={settings.about_image} alt="About Dhaka Beats" className="w-full h-full object-cover" />
+            ) : (
+              <>
+                <div className="w-2/3 h-2/3 bg-electric-red/10 rounded-full blur-[80px]" />
+                <img src="/logo1.svg" alt="About Dhaka Beats" className="w-32 opacity-20 group-hover:opacity-40 transition-opacity grayscale" />
+              </>
+            )}
           </div>
         </div>
         

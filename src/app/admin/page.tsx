@@ -407,6 +407,10 @@ export default function AdminDashboard() {
                 <div className="space-y-4">
                   <div><label className="text-[10px] uppercase font-black text-white/30 ml-1">About Headline</label><input value={settingsForm.about_headline || ""} onChange={e => setSettingsForm({...settingsForm, about_headline: e.target.value})} className="w-full bg-white/5 border border-white/5 rounded-xl p-4 text-white focus:outline-none focus:border-electric-red" /></div>
                   <div><label className="text-[10px] uppercase font-black text-white/30 ml-1">About Description</label><textarea rows={10} value={settingsForm.about_description || ""} onChange={e => setSettingsForm({...settingsForm, about_description: e.target.value})} className="w-full bg-white/5 border border-white/5 rounded-xl p-4 text-white focus:outline-none focus:border-electric-red" /></div>
+                  <div>
+                    <label className="text-[10px] uppercase font-black text-white/30 ml-1">About Section Image</label>
+                    <ImageUpload value={settingsForm.about_image || ""} onChange={url => setSettingsForm({...settingsForm, about_image: url})} />
+                  </div>
                 </div>
               </div>
             </div>
