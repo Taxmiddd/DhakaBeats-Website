@@ -119,11 +119,8 @@ export default function FeaturedEventHome() {
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   className="text-6xl md:text-8xl xl:text-[clamp(5rem,8vw,10rem)] font-black uppercase tracking-tighter leading-[0.85] text-white drop-shadow-2xl will-change-transform"
                 >
-                  <div className="relative inline-block">
-                    {firstPart} <br className="hidden md:block" />
-                    <span className="text-electric-red inline-block transform-gpu">
-                      {lastWord}
-                    </span>
+                  <div className="relative inline-block whitespace-nowrap">
+                    {firstPart} {lastWord !== "" && <span className="text-electric-red">{lastWord}</span>}
                     
                     {event.is_concluded && (
                       <div className="absolute -top-16 left-1/2 -translate-x-1/2">
