@@ -11,8 +11,33 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Dhaka Beats | One Beat Ahead",
-  description: "Premium Event Management Platform in Dhaka",
+  title: {
+    default: "Dhaka Beats | One Beat Ahead",
+    template: "%s | Dhaka Beats"
+  },
+  description: "Dhaka Beats is the city's most exclusive event platform, dedicated to elevating the music and culture scene. We curate high-energy concerts, underground festivals, and premium artist experiences.",
+  applicationName: "Dhaka Beats",
+  authors: [{ name: "Dhaka Beats Team" }],
+  keywords: ["Events", "Concert", "Dhaka", "Music Festival", "Artist Management", "Ticketing"],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://dhakabeats.com",
+    siteName: "Dhaka Beats",
+    title: "Dhaka Beats | One Beat Ahead",
+    description: "Premium Event Management Platform in Dhaka",
+    images: [{ url: "/logo1.svg", width: 800, height: 600, alt: "Dhaka Beats" }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dhaka Beats | One Beat Ahead",
+    description: "Premium Event Management Platform in Dhaka",
+    images: ["/logo1.svg"]
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/logo1.svg"
+  }
 };
 
 export default function RootLayout({
