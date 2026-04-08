@@ -147,34 +147,64 @@ export default function AdminDashboard() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      let error;
+
       if (activeTab === "events") {
-        if (editingItem) await supabase.from("events").update(eventForm).eq("id", editingItem.id);
-        else await supabase.from("events").insert([eventForm]);
+        if (editingItem) {
+          const { error: err } = await supabase.from("events").update(eventForm).eq("id", editingItem.id);
+          error = err;
+        } else {
+          const { error: err } = await supabase.from("events").insert([eventForm]);
+          error = err;
+        }
       } else if (activeTab === "gallery") {
-        if (editingItem) await supabase.from("gallery").update(galleryForm).eq("id", editingItem.id);
-        else await supabase.from("gallery").insert([galleryForm]);
+        if (editingItem) {
+          const { error: err } = await supabase.from("gallery").update(galleryForm).eq("id", editingItem.id);
+          error = err;
+        } else {
+          const { error: err } = await supabase.from("gallery").insert([galleryForm]);
+          error = err;
+        }
       } else if (activeTab === "team") {
-        if (editingItem) await supabase.from("team").update(teamForm).eq("id", editingItem.id);
-        else await supabase.from("team").insert([teamForm]);
+        if (editingItem) {
+          const { error: err } = await supabase.from("team").update(teamForm).eq("id", editingItem.id);
+          error = err;
+        } else {
+          const { error: err } = await supabase.from("team").insert([teamForm]);
+          error = err;
+        }
       } else if (activeTab === "services") {
-        if (editingItem) await supabase.from("services").update(serviceForm).eq("id", editingItem.id);
-        else await supabase.from("services").insert([serviceForm]);
+        if (editingItem) {
+          const { error: err } = await supabase.from("services").update(serviceForm).eq("id", editingItem.id);
+          error = err;
+        } else {
+          // Remove ID if present to prevent conflict during creation
+          const { id, ...data } = serviceForm as any;
+          const { error: err } = await supabase.from("services").insert([data]);
+          error = err;
+        }
       } else if (activeTab === "settings") {
         const settingsArray = Object.entries(settingsForm).map(([key, value]) => ({ key, value }));
-        const { error } = await supabase
+        const { error: err } = await supabase
           .from("site_settings")
           .upsert(settingsArray, { onConflict: "key" });
+        error = err;
         
-        if (error) throw error;
-        
-        alert("Site CMS Updated Successfully! ✨");
-        return refreshData();
+        if (!error) {
+          alert("Site CMS Updated Successfully! ✨");
+          return refreshData();
+        }
       }
+
+      if (error) throw error;
+
       setShowModal(false);
       setEditingItem(null);
       refreshData();
+      alert(`Successfully saved ${activeTab.slice(0, -1)}!`);
     } catch (err: any) {
-      alert(err.message);
+      console.error("Management Error:", err);
+      alert("Error: " + (err.message || "Failed to save changes. Check console for details."));
     }
   };
 

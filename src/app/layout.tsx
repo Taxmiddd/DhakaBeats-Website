@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://dhakabeats.com",
+    url: "https://dhakabeats.info",
     siteName: "Dhaka Beats",
     title: "Dhaka Beats | One Beat Ahead",
     description: "Premium Event Management Platform in Dhaka",

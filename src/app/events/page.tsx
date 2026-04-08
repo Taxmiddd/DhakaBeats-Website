@@ -113,7 +113,7 @@ export default function EventsPage() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="group relative glass rounded-[40px] overflow-hidden border border-white/10 aspect-[4/5] shadow-2xl"
+                  className="group relative glass rounded-[40px] overflow-hidden border border-white/10 aspect-[16/10] shadow-2xl"
                 >
                   <img src={event.image_url} alt="" className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80" />
